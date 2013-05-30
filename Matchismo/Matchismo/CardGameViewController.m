@@ -16,6 +16,8 @@
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
 @property (strong, nonatomic) CardMatchingGame *game;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *flipResult;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *gameModeSegControl;
 
 @end
 
@@ -35,9 +37,21 @@
     return _game;
 }
 
+#define IMAGE_INSET 5
+
 - (void)setCardButtons:(NSArray *)cardButtons
 {
     _cardButtons = cardButtons;
+    
+    UIImage *cardBackImage = [UIImage imageNamed:@"cardback.png"];
+    UIImage *noImage = [[UIImage alloc] init];
+    for (UIButton *button in cardButtons) {
+        [button setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+        [button setImage:cardBackImage forState:UIControlStateNormal];
+        [button setImage:noImage forState:UIControlStateSelected];
+        [button setImage:noImage forState:UIControlStateSelected|UIControlStateDisabled];
+    }
+    
     [self updateUI];
 }
 
@@ -56,10 +70,49 @@
 
 - (IBAction)flipCard:(UIButton *)sender
 {
+    if (self.gameModeSegControl.enabled) self.gameModeSegControl.enabled = NO;
+    
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
+    [self updateFlipResult];
     self.flipCount++;
     [self updateUI];
 }
 
+#define WELCOME_MSG @"Welcome to Matchismo"
+
+- (void)updateFlipResult
+{
+    NSMutableArray *cards = [[NSMutableArray alloc] init];
+    for (Card *flippedCard in self.game.cardsFlipped) {
+        [cards addObject:flippedCard.contents];
+    }
+    
+    if (!cards) {
+        self.flipResult.text = WELCOME_MSG;
+    } else if ((cards.count) && (cards.count < self.game.numCardsToMatch)) {
+        self.flipResult.text = [NSString stringWithFormat:@"Flipped up %@", [cards componentsJoinedByString:@" "]];
+    } else if (cards.count == self.game.numCardsToMatch) {
+        if (self.game.scoreChange > 0) {
+            self.flipResult.text = [NSString stringWithFormat:@"Matched %@ for %d points", [cards componentsJoinedByString:@" & "], self.game.scoreChange];
+        } else {
+            self.flipResult.text = [NSString stringWithFormat:@"%@ don’t match! %d point penalty", [cards componentsJoinedByString:@" & "], self.game.scoreChange];
+        }
+    }
+}
+
+- (IBAction)deal
+{
+    self.game = nil;
+    [self setFlipCount:0];
+    self.flipResult.text = WELCOME_MSG;
+    self.gameModeSegControl.enabled = YES;
+    [self changeGameMode];
+    [self updateUI];
+}
+
+- (IBAction)changeGameMode
+{
+    self.game.numCardsToMatch = self.gameModeSegControl.selectedSegmentIndex+2;
+}
 
 @end

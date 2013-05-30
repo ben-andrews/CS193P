@@ -21,4 +21,10 @@
 
 @property (nonatomic, readonly) int score;
 
+@property (nonatomic) NSMutableArray *cardsFlipped;
+@property (nonatomic, readonly) int scoreChange;
+@property (nonatomic) int numCardsToMatch;
+
+
+
 @end

@@ -10,17 +10,28 @@
 
 @implementation PlayingCard
 
+#define SUIT_MATCH 1
+#define RANK_MATCH 4
+
 - (int)match:(NSArray *)otherCards
 {
     int score = 0;
     
-    if (otherCards.count == 1) {
-        PlayingCard *otherCard = [otherCards lastObject];
-        if ([otherCard.suit isEqualToString:self.suit]) {
-            score = 1;
-        } else if (otherCard.rank == self.rank) {
-            score = 4;
-        }
+    NSMutableArray *cards = [NSMutableArray arrayWithArray:otherCards];
+    [cards addObject:self];
+    
+    NSMutableSet *suits = [[NSMutableSet alloc] init];
+    NSMutableSet *ranks = [[NSMutableSet alloc] init];
+    
+    for (PlayingCard *otherCard in cards) {
+        [suits addObject:otherCard.suit];
+        [ranks addObject:[NSNumber numberWithInt:otherCard.rank]];
+    }
+    
+    if (suits.count == 1) {
+        score = (cards.count == 2) ? SUIT_MATCH : SUIT_MATCH * cards.count;
+    } else if (ranks.count == 1) {
+        score = (cards.count == 2) ? RANK_MATCH : RANK_MATCH * cards.count;
     }
     
     return score;
