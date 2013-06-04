@@ -8,21 +8,26 @@
 
 #import "CardGameViewController.h"
 #import "PlayingCardDeck.h"
-#import "CardMatchingGame.h"
 
 @interface CardGameViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
 @property (nonatomic) int flipCount;
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
-@property (strong, nonatomic) CardMatchingGame *game;
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
 @property (weak, nonatomic) IBOutlet UILabel *flipResult;
-@property (weak, nonatomic) IBOutlet UISegmentedControl *gameModeSegControl;
-
+@property (nonatomic) UIImage *cardBack;
 @end
 
-
 @implementation CardGameViewController
+
+- (Deck *)createDeck
+{
+    return nil;
+}
+
+- (void)updateUI
+{
+    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+}
 
 - (void)setFlipCount:(int)flipCount
 {
@@ -32,9 +37,15 @@
 
 - (CardMatchingGame *)game
 {
-    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:self.cardButtons.count
-                                                          usingDeck:[[PlayingCardDeck alloc] init]];
+    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:self.cardCount
+                                                          usingDeck:[self createDeck]
+                                                   withCardsToMatch:self.cardsToMatch];
     return _game;
+}
+
+- (UIImage *)cardBack
+{
+    return [UIImage imageNamed:@"cardback.png"];
 }
 
 #define IMAGE_INSET 5
@@ -42,8 +53,8 @@
 - (void)setCardButtons:(NSArray *)cardButtons
 {
     _cardButtons = cardButtons;
-    
-    UIImage *cardBackImage = [UIImage imageNamed:@"cardback.png"];
+
+    UIImage *cardBackImage = self.cardBack;
     UIImage *noImage = [[UIImage alloc] init];
     for (UIButton *button in cardButtons) {
         [button setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
@@ -55,30 +66,13 @@
     [self updateUI];
 }
 
-- (void)updateUI
-{
-    for (UIButton *cardButton in self.cardButtons) {
-        Card *card = [self.game cardAtIndex:[self.cardButtons indexOfObject:cardButton]];
-        [cardButton setTitle:card.contents forState:UIControlStateSelected];
-        [cardButton setTitle:card.contents forState:UIControlStateSelected|UIControlStateDisabled];
-        cardButton.selected = card.isFaceUp;
-        cardButton.enabled = !card.isUnplayable;
-        cardButton.alpha = card.isUnplayable ? 0.3 : 1.0;
-    }
-    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
-}
-
 - (IBAction)flipCard:(UIButton *)sender
-{
-    if (self.gameModeSegControl.enabled) self.gameModeSegControl.enabled = NO;
-    
+{    
     [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
     [self updateFlipResult];
     self.flipCount++;
     [self updateUI];
 }
-
-#define WELCOME_MSG @"Welcome to Matchismo"
 
 - (void)updateFlipResult
 {
@@ -87,9 +81,7 @@
         [cards addObject:flippedCard.contents];
     }
     
-    if (!cards) {
-        self.flipResult.text = WELCOME_MSG;
-    } else if ((cards.count) && (cards.count < self.game.numCardsToMatch)) {
+    if ((cards.count) && (cards.count < self.game.numCardsToMatch)) {
         self.flipResult.text = [NSString stringWithFormat:@"Flipped up %@", [cards componentsJoinedByString:@" "]];
     } else if (cards.count == self.game.numCardsToMatch) {
         if (self.game.scoreChange > 0) {
@@ -104,15 +96,8 @@
 {
     self.game = nil;
     [self setFlipCount:0];
-    self.flipResult.text = WELCOME_MSG;
-    self.gameModeSegControl.enabled = YES;
-    [self changeGameMode];
+    self.flipResult.text = @"";
     [self updateUI];
-}
-
-- (IBAction)changeGameMode
-{
-    self.game.numCardsToMatch = self.gameModeSegControl.selectedSegmentIndex+2;
 }
 
 @end

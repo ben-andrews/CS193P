@@ -28,9 +28,7 @@
     return _cardsFlipped;
 }
 
-#define DEFAULT_CARDS_TO_MATCH 2
-
-- (id)initWithCardCount:(NSUInteger)count usingDeck:(Deck *)deck
+- (id)initWithCardCount:(NSUInteger)count usingDeck:(Deck *)deck withCardsToMatch:(NSUInteger)cardsToMatch
 {
     self = [super init];
     
@@ -43,7 +41,7 @@
                 self.cards[i] = card;
             }
         }
-        self.numCardsToMatch = DEFAULT_CARDS_TO_MATCH;
+        self.numCardsToMatch = cardsToMatch;
     }
     
     return self;
@@ -62,7 +60,7 @@
 {
     Card *card = [self cardAtIndex:index];
     
-    // Post-match/ 
+    // Post-match
     if ((self.cardsFlipped.count == self.numCardsToMatch) && (self.scoreChange > 0)) {
         [self.cardsFlipped removeAllObjects];
     }

@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Deck.h"
+#import "CardMatchingGame.h"
 
 @interface CardGameViewController : UIViewController
+
+@property (strong, nonatomic) CardMatchingGame *game;
+@property (nonatomic) NSUInteger cardCount;
+@property (nonatomic) NSUInteger cardsToMatch;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+- (Deck *)createDeck;
+- (void)updateUI;
 
 @end

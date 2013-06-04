@@ -25,7 +25,7 @@
     
     for (PlayingCard *otherCard in cards) {
         [suits addObject:otherCard.suit];
-        [ranks addObject:[NSNumber numberWithInt:otherCard.rank]];
+        [ranks addObject:@(otherCard.rank)];
     }
     
     if (suits.count == 1) {
