@@ -12,6 +12,7 @@
 @property (strong, nonatomic) NSMutableArray *cards; // of Card
 @property (nonatomic, readwrite) int score;
 @property (nonatomic, readwrite) int scoreChange;
+@property (nonatomic) Deck *deck;
 @end
 
 @implementation CardMatchingGame
@@ -42,6 +43,8 @@
             }
         }
         self.numCardsToMatch = cardsToMatch;
+        self.numCardsInPlay = count;
+        self.deck = deck;
     }
     
     return self;
@@ -52,9 +55,24 @@
     return (index < self.cards.count) ? self.cards[index] : nil;
 }
 
+- (BOOL)addThreeCards
+{
+    for (int i = 0; i < 3; i++) {
+        Card *card = [self.deck drawRandomCard];
+        if (card) {
+            [self.cards addObject:card];
+        } else {
+            return NO;
+        }
+    }
+    self.numCardsInPlay += 3;
+    return YES;
+}
+
 #define FLIP_COST 1
 #define MISMATCH_PENALTY 2
 #define MATCH_BONUS 4
+#define SET_GAME_NUM_CARDS 3
 
 - (void)flipCardAtIndex:(NSUInteger)index
 {
@@ -81,8 +99,11 @@
                 if (matchScore) {
                     for (Card *flippedCard in self.cardsFlipped) {
                         flippedCard.unplayable = YES;
+                        if (self.numCardsToMatch == SET_GAME_NUM_CARDS) [self.cards removeObject:flippedCard];
                     }
                     card.unplayable = YES;
+                    if (self.numCardsToMatch == SET_GAME_NUM_CARDS) [self.cards removeObject:card];
+                    self.numCardsInPlay -= self.numCardsToMatch;
                     self.score += matchScore * MATCH_BONUS;
                     self.scoreChange = matchScore * MATCH_BONUS;
                 } else {

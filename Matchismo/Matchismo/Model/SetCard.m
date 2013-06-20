@@ -19,34 +19,34 @@
     NSMutableArray *cards = [NSMutableArray arrayWithArray:otherCards];
     [cards addObject:self];
     
-    NSMutableSet *numbers = [[NSMutableSet alloc] init];
     NSMutableSet *symbols = [[NSMutableSet alloc] init];
-    NSMutableSet *shadings = [[NSMutableSet alloc] init];
     NSMutableSet *colors = [[NSMutableSet alloc] init];
+    NSMutableSet *numbers = [[NSMutableSet alloc] init];
+    NSMutableSet *shadings = [[NSMutableSet alloc] init];
     
     for (SetCard *otherCard in cards) {
-        [numbers addObject:@(otherCard.number)];
-        [symbols addObject:otherCard.symbol];
+        [symbols addObject:@(otherCard.symbol)];
+        [colors addObject:@(otherCard.color)];
         [shadings addObject:@(otherCard.shading)];
-        [colors addObject:otherCard.color];
+        [numbers addObject:@(otherCard.number)];
     }
     
-    if (((numbers.count == 1) || (numbers.count == 3)) &&
-        ((symbols.count == 1) || (symbols.count == 3)) &&
-        ((shadings.count == 1) || (shadings.count == 3)) &&
-        ((colors.count == 1) || (colors.count == 3))) score = MATCH_POINTS;
+    if (((symbols.count == 1) || (symbols.count == 3)) &&
+        ((colors.count == 1) || (colors.count == 3)) &&
+        ((numbers.count == 1) || (numbers.count == 3)) &&
+        ((shadings.count == 1) || (shadings.count == 3))) score = MATCH_POINTS;
     
     return score;
 }
 
 + (NSArray *)symbols
 {
-    return @[@"▲", @"●", @"■"];
+    return @[@1, @2, @3];
 }
 
 + (NSArray *)colors
 {
-    return @[@"Red", @"Green", @"Blue"];
+    return @[@1, @2, @3];
 }
 
 + (NSArray *)numbers
@@ -56,12 +56,7 @@
 
 + (NSArray *)shadings
 {
-    return @[@0, @1, @2];
-}
-
-- (NSString *)contents
-{
-    return [NSString stringWithFormat:@"%@ %@ %d %d", self.symbol, self.color, self.number, self.shading];
+    return @[@1, @2, @3];
 }
 
 @end

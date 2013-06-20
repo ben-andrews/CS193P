@@ -13,10 +13,19 @@
 @interface CardGameViewController : UIViewController
 
 @property (strong, nonatomic) CardMatchingGame *game;
-@property (nonatomic) NSUInteger cardCount;
-@property (nonatomic) NSUInteger cardsToMatch;
-@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *cardButtons;
+@property (nonatomic) NSUInteger startingCardCount;
+@property (nonatomic) NSUInteger numCardsToMatch;
+@property (strong, nonatomic) NSString *reuseIdentifier;
+
+- (void)removeSubviewsFromView:(UIView *)view;
+- (NSString *)getCardsFlippedMessageText;
+
+// abstract:
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section;
+- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card animated:(BOOL)animated;
 - (Deck *)createDeck;
 - (void)updateUI;
+- (void)updateFlipResult;
+
 
 @end

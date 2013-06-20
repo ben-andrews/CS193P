@@ -8,96 +8,106 @@
 
 #import "CardGameViewController.h"
 #import "PlayingCardDeck.h"
+#import "FlipResultView.h"
 
-@interface CardGameViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *flipsLabel;
-@property (nonatomic) int flipCount;
+@interface CardGameViewController () <UICollectionViewDataSource>
 @property (weak, nonatomic) IBOutlet UILabel *scoreLabel;
-@property (weak, nonatomic) IBOutlet UILabel *flipResult;
-@property (nonatomic) UIImage *cardBack;
+@property (weak, nonatomic) IBOutlet UICollectionView *cardCollectionView;
+@property (weak, nonatomic) IBOutlet FlipResultView *flipResultView;
 @end
 
 @implementation CardGameViewController
 
-- (Deck *)createDeck
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return nil;
+    return 1;
 }
 
-- (void)updateUI
+- (NSInteger)collectionView:(UICollectionView *)collectionView
+     numberOfItemsInSection:(NSInteger)section
 {
-    self.scoreLabel.text = [NSString stringWithFormat:@"Score: %d", self.game.score];
+    return 0; // abstract
 }
 
-- (void)setFlipCount:(int)flipCount
+- (void)updateCell:(UICollectionViewCell *)cell usingCard:(Card *)card animated:(BOOL)animated { } // abstract
+
+- (Deck *)createDeck { return nil; } // abstract
+
+- (void)updateUI { } // abstract
+
+- (void)updateFlipResult { } // abstract
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+                  cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    _flipCount = flipCount;
-    self.flipsLabel.text = [NSString stringWithFormat:@"Flips: %d", self.flipCount];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:self.reuseIdentifier forIndexPath:indexPath];
+    Card *card = [self.game cardAtIndex:indexPath.item];
+    [self updateCell:cell usingCard:card animated:NO];
+    return cell;
 }
 
 - (CardMatchingGame *)game
 {
-    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:self.cardCount
+    if (!_game) _game = [[CardMatchingGame alloc] initWithCardCount:self.startingCardCount
                                                           usingDeck:[self createDeck]
-                                                   withCardsToMatch:self.cardsToMatch];
+                                                   withCardsToMatch:self.numCardsToMatch];
     return _game;
 }
 
-- (UIImage *)cardBack
+- (IBAction)flipCard:(UITapGestureRecognizer *)sender
 {
-    return [UIImage imageNamed:@"cardback.png"];
-}
-
-#define IMAGE_INSET 5
-
-- (void)setCardButtons:(NSArray *)cardButtons
-{
-    _cardButtons = cardButtons;
-
-    UIImage *cardBackImage = self.cardBack;
-    UIImage *noImage = [[UIImage alloc] init];
-    for (UIButton *button in cardButtons) {
-        [button setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
-        [button setImage:cardBackImage forState:UIControlStateNormal];
-        [button setImage:noImage forState:UIControlStateSelected];
-        [button setImage:noImage forState:UIControlStateSelected|UIControlStateDisabled];
-    }
-    
-    [self updateUI];
-}
-
-- (IBAction)flipCard:(UIButton *)sender
-{    
-    [self.game flipCardAtIndex:[self.cardButtons indexOfObject:sender]];
-    [self updateFlipResult];
-    self.flipCount++;
-    [self updateUI];
-}
-
-- (void)updateFlipResult
-{
-    NSMutableArray *cards = [[NSMutableArray alloc] init];
-    for (Card *flippedCard in self.game.cardsFlipped) {
-        [cards addObject:flippedCard.contents];
-    }
-    
-    if ((cards.count) && (cards.count < self.game.numCardsToMatch)) {
-        self.flipResult.text = [NSString stringWithFormat:@"Flipped up %@", [cards componentsJoinedByString:@" "]];
-    } else if (cards.count == self.game.numCardsToMatch) {
-        if (self.game.scoreChange > 0) {
-            self.flipResult.text = [NSString stringWithFormat:@"Matched %@ for %d points", [cards componentsJoinedByString:@" & "], self.game.scoreChange];
-        } else {
-            self.flipResult.text = [NSString stringWithFormat:@"%@ don’t match! %d point penalty", [cards componentsJoinedByString:@" & "], self.game.scoreChange];
-        }
+    CGPoint tapLocation = [sender locationInView:self.cardCollectionView];
+    NSIndexPath *indexPath = [self.cardCollectionView indexPathForItemAtPoint:tapLocation];
+    if (indexPath) {
+        [self.game flipCardAtIndex:indexPath.item];
+        [self updateUI];
     }
 }
 
 - (IBAction)deal
 {
     self.game = nil;
-    [self setFlipCount:0];
-    self.flipResult.text = @"";
+    [self.cardCollectionView reloadData];
     [self updateUI];
+}
+
+- (IBAction)addThreeCards
+{
+    if ([self.game addThreeCards]) {
+        NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
+        NSUInteger section = [self.cardCollectionView numberOfSections]-1;
+        for (int i = 0; i < 3; i++) {
+            NSUInteger item = [self.cardCollectionView numberOfItemsInSection:section]+i;
+            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:item inSection:section];
+            [indexPaths addObject:indexPath];
+        }
+        [self.cardCollectionView insertItemsAtIndexPaths:indexPaths];
+        [self.cardCollectionView scrollToItemAtIndexPath:indexPaths[0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Whoops" message:@"No more cards left in deck" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [alert show];
+    }
+}
+
+- (void)removeSubviewsFromView:(UIView *)view
+{
+    NSArray *viewsToRemove = [view subviews];
+    for (UIView *view in viewsToRemove) {
+        [view removeFromSuperview];
+    }
+}
+
+- (NSString *)getCardsFlippedMessageText
+{
+    NSString *messageText = [[NSString alloc] init];
+    if (self.game.cardsFlipped.count < self.game.numCardsToMatch) {
+        messageText = @"Flipped up";
+    } else if ((self.game.cardsFlipped.count == self.game.numCardsToMatch) && (self.game.scoreChange > 0)) {
+        messageText = [NSString stringWithFormat:@"Matched for %d points", self.game.scoreChange];
+    } else if ((self.game.cardsFlipped.count == self.game.numCardsToMatch) && (self.game.scoreChange < 0)) {
+        messageText = [NSString stringWithFormat:@"Don’t match! %d point penalty", self.game.scoreChange];
+    }
+    return messageText;
 }
 
 @end

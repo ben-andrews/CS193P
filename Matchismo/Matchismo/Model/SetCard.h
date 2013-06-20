@@ -10,8 +10,8 @@
 
 @interface SetCard : Card
 
-@property (nonatomic) NSString *symbol;
-@property (nonatomic) NSString *color;
+@property (nonatomic) NSUInteger symbol;
+@property (nonatomic) NSUInteger color;
 @property (nonatomic) NSUInteger number;
 @property (nonatomic) NSUInteger shading;
 
