@@ -8,6 +8,7 @@
 
 #import "FlickrPhotoTVC.h"
 #import "FlickrFetcher.h"
+#import "ImageCacheManager.h"
 
 @implementation FlickrPhotoTVC
 
@@ -20,6 +21,14 @@
     [self.tableView reloadData];
 }
 
+- (void)viewDidLoad
+{
+    NSSortDescriptor *sortByPhotoName = [NSSortDescriptor sortDescriptorWithKey:FLICKR_PHOTO_TITLE ascending:YES];
+    NSSortDescriptor *sortByPhotoSubtitle = [NSSortDescriptor sortDescriptorWithKey:FLICKR_PHOTO_DESCRIPTION ascending:YES];
+    NSArray *sortDescriptors = [NSArray arrayWithObjects:sortByPhotoName, sortByPhotoSubtitle, nil];
+    self.photos = [self.photos sortedArrayUsingDescriptors:sortDescriptors];
+}
+
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -29,7 +38,14 @@
         if (indexPath) {
             if ([segue.identifier isEqualToString:@"Show Image"]) {
                 if ([segue.destinationViewController respondsToSelector:@selector(setImageURL:)]) {
-                    NSURL *url = [FlickrFetcher urlForPhoto:self.photos[indexPath.row] format:FlickrPhotoFormatLarge];
+                    FlickrPhotoFormat imageFormat = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? FlickrPhotoFormatOriginal : FlickrPhotoFormatLarge;
+                    NSURL *url = [FlickrFetcher urlForPhoto:self.photos[indexPath.row] format:imageFormat];
+                    NSString *photoID = self.photos[indexPath.row][@"id"];
+                    if (![ImageCacheManager imageInCache:photoID]) {
+                        [ImageCacheManager cacheImageFromUrl:url withFilename:photoID];
+                    } else {
+                        url = [ImageCacheManager urlForImage:photoID];
+                    }
                     [segue.destinationViewController performSelector:@selector(setImageURL:) withObject:url];
                     [segue.destinationViewController setTitle:[self titleForRow:indexPath.row]];
                     [self saveToHistory:indexPath];

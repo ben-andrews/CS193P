@@ -20,6 +20,7 @@
 {
     _tags = tags;
     self.orderedTags = [tags allKeys];
+    self.orderedTags = [self.orderedTags sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     [self.tableView reloadData];
 }
 

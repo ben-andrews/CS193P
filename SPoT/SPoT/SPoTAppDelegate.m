@@ -10,6 +10,27 @@
 
 @implementation SPoTAppDelegate
 
+@synthesize networkActivityCounter;
+
+#pragma mark - NetworkActivityIndicator
+
+- (void)incrementNetworkActivity {
+    networkActivityCounter += 1;
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+}
+
+- (void)decrementNetworkActivity {
+    if (networkActivityCounter > 0) networkActivityCounter -= 1;
+    if (networkActivityCounter == 0) [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
+- (void)resetNetworkActivity {
+    networkActivityCounter = 0;
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+
+#pragma mark - Application Lifecycle
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
