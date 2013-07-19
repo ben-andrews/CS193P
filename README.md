@@ -41,3 +41,11 @@ Extending the photo fetching application from assignment 4 to use multithreading
 
 <img src="https://lh3.googleusercontent.com/-9tKkDvlhxjU/UdvqyIB36CI/AAAAAAAAAEE/ZAbeDWvR79k/s379/Assignment5_Small.png" alt="Screenshot">
 -
+**Assignment 6, Core Data SPoT**<br />
+Based on assignment 5, this app uses Core Data to store the details of a photo and a thumbnail, while still caching the full-sized images using NSFileManager.<br />
+- NSManagedObject<br />
+- NSFetchRequest & NSFetchedResultsController<br />
+<a href="http://youtu.be/n8LcJU6zyKQ">http://youtu.be/n8LcJU6zyKQ</a>
+
+<img src="https://lh4.googleusercontent.com/-t_A2jpkOTqA/UeV-4qmAXkI/AAAAAAAAAEc/vYAbqersyTw/w160-h284-no/Assignment6_Small.png" alt="Screenshot">
+-
