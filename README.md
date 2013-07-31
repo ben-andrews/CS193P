@@ -46,5 +46,6 @@ Based on assignment 5, this app uses Core Data to store the details of a photo a
 - NSManagedObject<br />
 - NSFetchRequest & NSFetchedResultsController<br />
 <a href="http://youtu.be/kAHa8CkqfZY">http://youtu.be/kAHa8CkqfZY</a>
+
 <img src="https://lh3.googleusercontent.com/-dxWqDFugBxE/UfaZ6TpL8mI/AAAAAAAAAFE/hHrff84-cuE/w160-h284-no/Assignment6_2_Small.png" alt="Screenshot">
 -
