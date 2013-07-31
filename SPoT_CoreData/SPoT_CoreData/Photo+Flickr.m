@@ -41,7 +41,9 @@
         photo.subtitle = [[photoDictionary valueForKeyPath:FLICKR_PHOTO_DESCRIPTION] description];
         FlickrPhotoFormat imageFormat = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? FlickrPhotoFormatOriginal : FlickrPhotoFormatLarge;
         photo.photoURL = [[FlickrFetcher urlForPhoto:photoDictionary format:imageFormat] absoluteString];
-        photo.thumbnailURL = [[FlickrFetcher urlForPhoto:photoDictionary format:FlickrPhotoFormatSquare] absoluteString];
+        photo.thumbnailURLString = [[FlickrFetcher urlForPhoto:photoDictionary format:FlickrPhotoFormatSquare] absoluteString];
+        photo.latitude = photoDictionary[FLICKR_LATITUDE];
+        photo.longitude = photoDictionary[FLICKR_LONGITUDE];
         
         NSMutableArray *tags = [[[photoDictionary[FLICKR_TAGS] description] componentsSeparatedByString:@" "] mutableCopy];
         [tags removeObjectsInArray:TAGS_TO_SKIP];

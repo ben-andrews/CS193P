@@ -8,6 +8,7 @@
 
 #import "PhotosCDTVC.h"
 #import "Photo.h"
+#import "Photo+MKAnnotation.h"
 #import "ImageCacheManager.h"
 #import "FlickrFetcher.h"
 #import "SPoTAppDelegate.h"
@@ -71,24 +72,8 @@
     
     cell.textLabel.text = photo.title;
     cell.detailTextLabel.text = photo.subtitle;
+    cell.imageView.image = [photo thumbnailImage];
     
-    // Get thumbnail
-    if (!photo.thumbnail) {
-        SPoTAppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-        dispatch_queue_t thumbnailFetchQ = dispatch_queue_create("thumbnail fetcher", NULL);
-        dispatch_async(thumbnailFetchQ, ^{
-            [delegate incrementNetworkActivity];
-            NSData *imageData = [[NSData alloc] initWithContentsOfURL:[NSURL URLWithString:photo.thumbnailURL]];
-            [delegate decrementNetworkActivity];
-            UIImage *image = [UIImage imageWithData:imageData];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                photo.thumbnail = imageData;
-                cell.imageView.image = image;
-            });
-        });
-    } else {
-        cell.imageView.image = [UIImage imageWithData:photo.thumbnail];
-    }
     return cell;
 }
 

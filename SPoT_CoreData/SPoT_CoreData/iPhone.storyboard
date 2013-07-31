@@ -109,12 +109,41 @@
                     </tabBar>
                     <connections>
                         <segue destination="0KC-jz-yaZ" kind="relationship" relationship="viewControllers" id="biR-B6-KLr"/>
+                        <segue destination="Uka-aY-6Tc" kind="relationship" relationship="viewControllers" id="4p8-Un-G9Q"/>
                         <segue destination="MIZ-ui-nwH" kind="relationship" relationship="viewControllers" id="UDo-7o-BVx"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mv6-se-sbw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1018" y="-1274"/>
+            <point key="canvasLocation" x="-990" y="-1045"/>
+        </scene>
+        <!--Photos Map View Controller - Map-->
+        <scene sceneID="Kga-0L-Pya">
+            <objects>
+                <viewController id="Wcr-o4-A4P" customClass="PhotosMapViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="V2M-xJ-xsn">
+                        <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="m5D-hP-X0k"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="m5D-hP-X0k" firstAttribute="top" secondItem="V2M-xJ-xsn" secondAttribute="top" type="default" id="8rX-I7-hNv"/>
+                            <constraint firstItem="m5D-hP-X0k" firstAttribute="trailing" secondItem="V2M-xJ-xsn" secondAttribute="trailing" type="default" id="EHJ-EM-g5V"/>
+                            <constraint firstItem="m5D-hP-X0k" firstAttribute="leading" secondItem="V2M-xJ-xsn" secondAttribute="leading" type="default" id="mcG-0A-x7Q"/>
+                            <constraint firstItem="m5D-hP-X0k" firstAttribute="bottom" secondItem="V2M-xJ-xsn" secondAttribute="bottom" type="default" id="siF-ob-Na8"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Map" id="ENJ-uf-dmB"/>
+                    <connections>
+                        <outlet property="mapView" destination="m5D-hP-X0k" id="COg-T5-nJc"/>
+                        <segue destination="0Mj-Wi-C7D" kind="push" identifier="Show Image" id="HcB-HA-nL9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9kV-Cy-N0x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="345" y="-150"/>
         </scene>
         <!--Navigation Controller - Item-->
         <scene sceneID="GfV-Cm-Dm1">
@@ -130,7 +159,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B2Y-si-bIK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-72" y="-617"/>
+            <point key="canvasLocation" x="-72" y="-1045"/>
         </scene>
         <!--Photo HistoryCDTVC - History-->
         <scene sceneID="rNI-WI-Q0g">
@@ -176,7 +205,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DhW-H3-sgt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="345" y="-617"/>
+            <point key="canvasLocation" x="345" y="-1045"/>
         </scene>
         <!--Flickr TagsCDTVC - SPoT-->
         <scene sceneID="gB9-Qa-fbd">
@@ -227,13 +256,79 @@
             </objects>
             <point key="canvasLocation" x="-72" y="-1917"/>
         </scene>
+        <!--Navigation Controller - Map-->
+        <scene sceneID="MI3-9d-m0S">
+            <objects>
+                <navigationController id="Uka-aY-6Tc" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" image="map_pin.png" id="ub9-c4-ZPJ"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="LYr-Pr-3JL"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lwp-2Q-3UJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Wcr-o4-A4P" kind="relationship" relationship="rootViewController" id="v94-rV-rHF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fq4-jG-hCj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-72" y="-150"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="map_pin.png" width="30" height="30"/>
+    </resources>
+    <classes>
+        <class className="CoreDataTableViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
+        </class>
+        <class className="FlickrTagsCDTVC" superclassName="TagCDTVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FlickrTagsCDTVC.h"/>
+        </class>
+        <class className="ImageViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImageViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="MapViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MapViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="mapView" candidateClass="MKMapView"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="PhotoHistoryCDTVC" superclassName="PhotosCDTVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoHistoryCDTVC.h"/>
+        </class>
+        <class className="PhotosByTagCDTVC" superclassName="PhotosCDTVC">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotosByTagCDTVC.h"/>
+        </class>
+        <class className="PhotosCDTVC" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotosCDTVC.h"/>
+        </class>
+        <class className="PhotosMapViewController" superclassName="MapViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotosMapViewController.h"/>
+        </class>
+        <class className="TagCDTVC" superclassName="CoreDataTableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TagCDTVC.h"/>
+        </class>
+        <class className="UIRefreshControl" superclassName="UIControl">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIRefreshControl.h"/>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="pZf-6r-oMd"/>
+        <segue reference="HcB-HA-nL9"/>
     </inferredMetricsTieBreakers>
 </document>

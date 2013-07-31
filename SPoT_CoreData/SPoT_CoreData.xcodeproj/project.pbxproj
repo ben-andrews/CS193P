@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5353B22B179FDCDA00121279 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5353B22A179FDCDA00121279 /* MapViewController.m */; };
+		5353B22D179FDD5000121279 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5353B22C179FDD5000121279 /* MapKit.framework */; };
+		5353B230179FDEC700121279 /* PhotosMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5353B22F179FDEC700121279 /* PhotosMapViewController.m */; };
+		5353B234179FE81C00121279 /* Photo+MKAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5353B233179FE81C00121279 /* Photo+MKAnnotation.m */; };
+		5353B237179FEA4D00121279 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 5353B236179FEA4D00121279 /* Tag.m */; };
+		5353B23A179FEA4D00121279 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 5353B239179FEA4D00121279 /* Photo.m */; };
+		53BA8C2F17A6AA4A000111FC /* licence.txt in Resources */ = {isa = PBXBuildFile; fileRef = 53BA8C2C17A6AA4A000111FC /* licence.txt */; };
+		53BA8C3017A6AA4A000111FC /* map_pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 53BA8C2D17A6AA4A000111FC /* map_pin.png */; };
+		53BA8C3117A6AA4A000111FC /* map_pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53BA8C2E17A6AA4A000111FC /* map_pin@2x.png */; };
 		53FEC9B017934AC6000815CB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FEC9AF17934AC6000815CB /* UIKit.framework */; };
 		53FEC9B217934AC6000815CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FEC9B117934AC6000815CB /* Foundation.framework */; };
 		53FEC9B417934AC6000815CB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53FEC9B317934AC6000815CB /* CoreGraphics.framework */; };
@@ -31,12 +40,24 @@
 		53FECA2217949E2B000815CB /* iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53FECA2117949E2B000815CB /* iPad.storyboard */; };
 		53FECA2E179543E3000815CB /* PhotosCDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FECA2D179543E3000815CB /* PhotosCDTVC.m */; };
 		53FECA3417954422000815CB /* PhotoHistoryCDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FECA3317954422000815CB /* PhotoHistoryCDTVC.m */; };
-		53FECA3D179597A6000815CB /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FECA3C179597A5000815CB /* Photo.m */; };
-		53FECA40179597A7000815CB /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FECA3F179597A6000815CB /* Tag.m */; };
 		53FECA4317985351000815CB /* SharedManagedDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 53FECA4217985351000815CB /* SharedManagedDocument.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5353B229179FDCDA00121279 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		5353B22A179FDCDA00121279 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		5353B22C179FDD5000121279 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		5353B22E179FDEC700121279 /* PhotosMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosMapViewController.h; sourceTree = "<group>"; };
+		5353B22F179FDEC700121279 /* PhotosMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosMapViewController.m; sourceTree = "<group>"; };
+		5353B232179FE81C00121279 /* Photo+MKAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Photo+MKAnnotation.h"; sourceTree = "<group>"; };
+		5353B233179FE81C00121279 /* Photo+MKAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Photo+MKAnnotation.m"; sourceTree = "<group>"; };
+		5353B235179FEA4D00121279 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
+		5353B236179FEA4D00121279 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
+		5353B238179FEA4D00121279 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
+		5353B239179FEA4D00121279 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		53BA8C2C17A6AA4A000111FC /* licence.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = licence.txt; sourceTree = "<group>"; };
+		53BA8C2D17A6AA4A000111FC /* map_pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_pin.png; sourceTree = "<group>"; };
+		53BA8C2E17A6AA4A000111FC /* map_pin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "map_pin@2x.png"; sourceTree = "<group>"; };
 		53FEC9AC17934AC6000815CB /* SPoT_CoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SPoT_CoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53FEC9AF17934AC6000815CB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		53FEC9B117934AC6000815CB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -77,10 +98,6 @@
 		53FECA2D179543E3000815CB /* PhotosCDTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosCDTVC.m; sourceTree = "<group>"; };
 		53FECA3217954422000815CB /* PhotoHistoryCDTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoHistoryCDTVC.h; sourceTree = "<group>"; };
 		53FECA3317954422000815CB /* PhotoHistoryCDTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoHistoryCDTVC.m; sourceTree = "<group>"; };
-		53FECA3B179597A5000815CB /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
-		53FECA3C179597A5000815CB /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
-		53FECA3E179597A6000815CB /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
-		53FECA3F179597A6000815CB /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
 		53FECA4117985351000815CB /* SharedManagedDocument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SharedManagedDocument.h; sourceTree = "<group>"; };
 		53FECA4217985351000815CB /* SharedManagedDocument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SharedManagedDocument.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5353B22D179FDD5000121279 /* MapKit.framework in Frameworks */,
 				53FECA0E17946DC3000815CB /* CoreData.framework in Frameworks */,
 				53FEC9B017934AC6000815CB /* UIKit.framework in Frameworks */,
 				53FEC9B217934AC6000815CB /* Foundation.framework in Frameworks */,
@@ -100,6 +118,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5353B231179FDED700121279 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				5353B229179FDCDA00121279 /* MapViewController.h */,
+				5353B22A179FDCDA00121279 /* MapViewController.m */,
+				5353B22E179FDEC700121279 /* PhotosMapViewController.h */,
+				5353B22F179FDEC700121279 /* PhotosMapViewController.m */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		53BA8C2B17A6AA4A000111FC /* Tab Bar Icons */ = {
+			isa = PBXGroup;
+			children = (
+				53BA8C2C17A6AA4A000111FC /* licence.txt */,
+				53BA8C2D17A6AA4A000111FC /* map_pin.png */,
+				53BA8C2E17A6AA4A000111FC /* map_pin@2x.png */,
+			);
+			path = "Tab Bar Icons";
+			sourceTree = "<group>";
+		};
 		53FEC9A317934AC6000815CB = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +160,7 @@
 		53FEC9AE17934AC6000815CB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5353B22C179FDD5000121279 /* MapKit.framework */,
 				53FECA0C17946D92000815CB /* CoreData.framework */,
 				53FEC9AF17934AC6000815CB /* UIKit.framework */,
 				53FEC9B117934AC6000815CB /* Foundation.framework */,
@@ -133,20 +173,23 @@
 			isa = PBXGroup;
 			children = (
 				53FEC9DE1793EF0B000815CB /* SPoT_CoreData.xcdatamodeld */,
-				53FECA3E179597A6000815CB /* Tag.h */,
-				53FECA3F179597A6000815CB /* Tag.m */,
-				53FECA3B179597A5000815CB /* Photo.h */,
-				53FECA3C179597A5000815CB /* Photo.m */,
+				5353B235179FEA4D00121279 /* Tag.h */,
+				5353B236179FEA4D00121279 /* Tag.m */,
+				5353B238179FEA4D00121279 /* Photo.h */,
+				5353B239179FEA4D00121279 /* Photo.m */,
 				53FEC9F617940837000815CB /* Tag+Create.h */,
 				53FEC9F717940837000815CB /* Tag+Create.m */,
 				53FEC9F317940827000815CB /* Photo+Flickr.h */,
 				53FEC9F417940827000815CB /* Photo+Flickr.m */,
+				5353B232179FE81C00121279 /* Photo+MKAnnotation.h */,
+				5353B233179FE81C00121279 /* Photo+MKAnnotation.m */,
 				53FECA1617949549000815CB /* ImageViewController.h */,
 				53FECA1717949549000815CB /* ImageViewController.m */,
 				53FECA181794954A000815CB /* ImageCacheManager.h */,
 				53FECA191794954A000815CB /* ImageCacheManager.m */,
 				53FECA4117985351000815CB /* SharedManagedDocument.h */,
 				53FECA4217985351000815CB /* SharedManagedDocument.m */,
+				5353B231179FDED700121279 /* Map */,
 				53FECA0817945258000815CB /* CDTVC */,
 				53FECA0F17946E96000815CB /* Storyboards */,
 				53FEC9D617934C6A000815CB /* FlickrFetcher */,
@@ -157,6 +200,7 @@
 		53FEC9B617934AC6000815CB /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				53BA8C2B17A6AA4A000111FC /* Tab Bar Icons */,
 				53FEC9BE17934AC6000815CB /* SPoTAppDelegate.h */,
 				53FEC9BF17934AC6000815CB /* SPoTAppDelegate.m */,
 				53FEC9B717934AC6000815CB /* SPoT_CoreData-Info.plist */,
@@ -267,6 +311,9 @@
 				53FEC9C617934AC6000815CB /* Default-568h@2x.png in Resources */,
 				53FECA1D179495C8000815CB /* iPhone.storyboard in Resources */,
 				53FECA2217949E2B000815CB /* iPad.storyboard in Resources */,
+				53BA8C2F17A6AA4A000111FC /* licence.txt in Resources */,
+				53BA8C3017A6AA4A000111FC /* map_pin.png in Resources */,
+				53BA8C3117A6AA4A000111FC /* map_pin@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,9 +338,12 @@
 				53FECA1B1794954B000815CB /* ImageCacheManager.m in Sources */,
 				53FECA2E179543E3000815CB /* PhotosCDTVC.m in Sources */,
 				53FECA3417954422000815CB /* PhotoHistoryCDTVC.m in Sources */,
-				53FECA3D179597A6000815CB /* Photo.m in Sources */,
-				53FECA40179597A7000815CB /* Tag.m in Sources */,
 				53FECA4317985351000815CB /* SharedManagedDocument.m in Sources */,
+				5353B22B179FDCDA00121279 /* MapViewController.m in Sources */,
+				5353B230179FDEC700121279 /* PhotosMapViewController.m in Sources */,
+				5353B234179FE81C00121279 /* Photo+MKAnnotation.m in Sources */,
+				5353B237179FEA4D00121279 /* Tag.m in Sources */,
+				5353B23A179FEA4D00121279 /* Photo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,7 +2,7 @@
 //  Photo.m
 //  SPoT_CoreData
 //
-//  Created by Ben Andrews on 16/07/2013.
+//  Created by Ben Andrews on 24/07/2013.
 //  Copyright (c) 2013 Ben Andrews. All rights reserved.
 //
 
@@ -12,13 +12,15 @@
 
 @implementation Photo
 
+@dynamic lastViewed;
 @dynamic photoID;
 @dynamic photoURL;
 @dynamic subtitle;
-@dynamic title;
-@dynamic lastViewed;
 @dynamic thumbnail;
-@dynamic thumbnailURL;
+@dynamic thumbnailURLString;
+@dynamic title;
+@dynamic latitude;
+@dynamic longitude;
 @dynamic tags;
 
 @end

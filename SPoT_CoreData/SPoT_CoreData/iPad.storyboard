@@ -68,11 +68,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="1Et-qQ-jGG" firstAttribute="bottom" secondItem="tVx-82-rvj" secondAttribute="bottom" type="default" id="AV9-id-dLv"/>
                             <constraint firstItem="eya-yB-XYR" firstAttribute="leading" secondItem="tVx-82-rvj" secondAttribute="leading" type="default" id="LFG-N5-wAp"/>
                             <constraint firstItem="eya-yB-XYR" firstAttribute="trailing" secondItem="tVx-82-rvj" secondAttribute="trailing" type="default" id="TyZ-q4-WxF"/>
                             <constraint firstItem="1Et-qQ-jGG" firstAttribute="trailing" secondItem="tVx-82-rvj" secondAttribute="trailing" type="default" id="Wfu-ud-MOf"/>
                             <constraint firstItem="eya-yB-XYR" firstAttribute="top" secondItem="tVx-82-rvj" secondAttribute="top" type="default" id="ZAq-Sq-17w"/>
+                            <constraint firstAttribute="bottom" secondItem="1Et-qQ-jGG" secondAttribute="bottom" constant="-2" id="nVK-FG-3P0"/>
                             <constraint firstItem="eya-yB-XYR" firstAttribute="centerX" secondItem="Hgx-oP-86P" secondAttribute="centerX" type="default" id="qcE-bH-Q0u"/>
                             <constraint firstItem="1Et-qQ-jGG" firstAttribute="leading" secondItem="tVx-82-rvj" secondAttribute="leading" type="default" id="sDa-U9-lZ5"/>
                             <constraint firstItem="Hgx-oP-86P" firstAttribute="centerY" secondItem="tVx-82-rvj" secondAttribute="centerY" type="default" id="vdR-3t-FTQ"/>
@@ -136,6 +136,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="hib-ec-ICG" kind="relationship" relationship="viewControllers" id="KPi-EI-GOA"/>
+                        <segue destination="1ww-BT-dmv" kind="relationship" relationship="viewControllers" id="Uj8-cw-n1T"/>
                         <segue destination="EBo-Ch-DMy" kind="relationship" relationship="viewControllers" id="Nde-Qd-csu"/>
                     </connections>
                 </tabBarController>
@@ -261,47 +262,66 @@
             </objects>
             <point key="canvasLocation" x="-1448" y="-1429"/>
         </scene>
+        <!--Photos Map View Controller - Map-->
+        <scene sceneID="8z5-ar-0EB">
+            <objects>
+                <viewController id="V8f-pI-EzB" customClass="PhotosMapViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="C5z-iD-8JS">
+                        <rect key="frame" x="0.0" y="64" width="320" height="739"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="SJt-Hc-ujY"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="SJt-Hc-ujY" firstAttribute="bottom" secondItem="C5z-iD-8JS" secondAttribute="bottom" type="default" id="38O-r3-vkf"/>
+                            <constraint firstItem="SJt-Hc-ujY" firstAttribute="trailing" secondItem="C5z-iD-8JS" secondAttribute="trailing" type="default" id="B87-jz-Mlx"/>
+                            <constraint firstItem="SJt-Hc-ujY" firstAttribute="top" secondItem="C5z-iD-8JS" secondAttribute="top" type="default" id="MI6-eX-i4j"/>
+                            <constraint firstItem="SJt-Hc-ujY" firstAttribute="leading" secondItem="C5z-iD-8JS" secondAttribute="leading" type="default" id="pAd-dK-daY"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Map" id="zD4-oK-LaT"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    <connections>
+                        <outlet property="mapView" destination="SJt-Hc-ujY" id="tEd-zO-TX2"/>
+                        <segue destination="pyK-eg-qcn" kind="replace" identifier="Show Image" splitViewControllerTargetIndex="1" id="Nur-wV-KfZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hnF-jD-Eez" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1439" y="842"/>
+        </scene>
+        <!--Navigation Controller - Map-->
+        <scene sceneID="dg3-Jf-7nr">
+            <objects>
+                <navigationController id="1ww-BT-dmv" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" image="map-pin-icon.png" id="GID-t4-Bf8"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="hmc-CU-SHv"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dtB-Lr-upV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="V8f-pI-EzB" kind="relationship" relationship="rootViewController" id="bu6-dt-xxQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rIT-4i-RsL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1920" y="842"/>
+        </scene>
     </scenes>
-    <classes>
-        <class className="CoreDataTableViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/CoreDataTableViewController.h"/>
-        </class>
-        <class className="FlickrTagsCDTVC" superclassName="TagCDTVC">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FlickrTagsCDTVC.h"/>
-        </class>
-        <class className="ImageViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImageViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="spinner" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="PhotoHistoryCDTVC" superclassName="PhotosCDTVC">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoHistoryCDTVC.h"/>
-        </class>
-        <class className="PhotosByTagCDTVC" superclassName="PhotosCDTVC">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotosByTagCDTVC.h"/>
-        </class>
-        <class className="PhotosCDTVC" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotosCDTVC.h"/>
-        </class>
-        <class className="TagCDTVC" superclassName="CoreDataTableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/TagCDTVC.h"/>
-        </class>
-        <class className="UIRefreshControl" superclassName="UIControl">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UIRefreshControl.h"/>
-        </class>
-    </classes>
+    <resources>
+        <image name="map-pin-icon.png" width="30" height="30"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="xNn-xm-KP8"/>
+        <segue reference="Nur-wV-KfZ"/>
     </inferredMetricsTieBreakers>
 </document>
